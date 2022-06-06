@@ -2,13 +2,13 @@
 <html lang="en">
     {% include 'partials/head.html' %}
     <body>
-        <header class="main-header-container">
-            <header class="main-header">
-                <a href="/">
-                    <i class="fas fa-solid fa-address-book"></i>
-                    <span>Hello World</span>
-                </a>
-            </header>
-        </header>
+        {% include 'partials/header.html' %}
+        {% include 'partials/search.html' %}
+        
+        <main class="main-content-container">
+            <div class="main-content main-content-list container">
+                {% include 'pages/recipe.html' %}
+            </div>
+        </main>
     </body>
 </html>
