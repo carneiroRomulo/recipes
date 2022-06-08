@@ -1,2 +1,4 @@
 django==4.0.4
 Pillow==9.1.1
+pytest==7.1.2
+pytest-django==4.5.2
