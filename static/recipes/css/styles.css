@@ -191,6 +191,14 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--color-primary-dark-hover);
 }
 
+.main-content-detail .recipe-list-item {
+    max-width: 85rem;
+    margin: 0 auto;
+}
+.main-content-detail .recipe-list-item:hover {
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1);
+}
 .main-footer {
     display: flex;
     justify-content: center;

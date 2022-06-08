@@ -30,6 +30,18 @@
         
         <link rel="stylesheet" href="{% static 'recipes/css/styles.css' %}">
     
-        <title>Home Page</title>
+        <title>{% block title %}{% endblock title %} | Recipe</title>
     </head>
+    
+    <body>
+        {% include 'partials/header.html' %}
+        {% include 'partials/search.html' %}
+        
+        <main class="main-content-container">
+            {% block content %}{% endblock content %}
+        </main>
+
+        {% include 'partials/footer.html' %}
+    </body>
+
 </html>
