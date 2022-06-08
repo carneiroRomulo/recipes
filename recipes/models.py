@@ -3,6 +3,9 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=65)
+    def __str__(self):
+        return self.name
+
 
 class Recipe(models.Model):
     slug = models.SlugField()
@@ -25,3 +28,6 @@ class Recipe(models.Model):
 
     preparation_steps = models.CharField(max_length=5000)
     preparation_steps_is_html = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
