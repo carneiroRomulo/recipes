@@ -10,7 +10,7 @@ class Category(models.Model):
 
 
 class Recipe(models.Model):
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     is_published = models.BooleanField(default=True)

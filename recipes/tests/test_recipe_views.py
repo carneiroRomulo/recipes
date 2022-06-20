@@ -34,7 +34,6 @@ class RecipeViewHomeTest(RecipeTestBase):
         self.assertEqual(context.first().title, 'Recipe Title')
 
     def test_recipe_home_template_dont_load_non_published_recipes(self):
-        """Don't show recipe if is_published False"""
         self.make_recipe(is_published=False)
         response = self.client.get(reverse('recipes:home'))
         self.assertIn(
@@ -65,7 +64,6 @@ class RecipeViewCategoryTest(RecipeTestBase):
         self.assertEqual(len(context), 1)
 
     def test_recipe_category_template_dont_load_non_published_recipes(self):
-        """Don't show recipe if is_published False"""
         recipe = self.make_recipe(is_published=False)
         response = self.client.get(
             reverse('recipes:category', kwargs={'id': recipe.id}))
@@ -98,8 +96,18 @@ class RecipeViewDetailTest(RecipeTestBase):
         self.assertIn(needed_title, content)
 
     def test_recipe_detail_template_dont_load_non_published_recipe(self):
-        """Don't show recipe if is_published False"""
         recipe = self.make_recipe(is_published=False)
         response = self.client.get(
             reverse('recipes:recipe', kwargs={'id': recipe.category.id}))
         self.assertEqual(response.status_code, 404)
+
+
+class RecipeViewSearchTest(RecipeTestBase):
+
+    def test_recipe_view_search_function(self):
+        view = resolve(reverse('recipes:search'))
+        self.assertIs(view.func, views.search)
+
+    def test_recipe_view_search_loads_correct_template(self):
+        response = self.client.get(reverse('recipes:search'))
+        self.assertTemplateUsed(response, 'pages/search.html')
