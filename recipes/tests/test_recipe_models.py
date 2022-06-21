@@ -27,7 +27,7 @@ class RecipeModelTest(RecipeTestBase):
     ])
     def test_recipe_model_defaults(self, field):
         recipe = Recipe(
-            slug='recipe-slug',
+            slug=f'recipe-slug-{field}',
             cover='cover.png',
             category=self.make_category(name='Test Default Category'),
             author=self.make_author(username='newuser'),
@@ -41,9 +41,7 @@ class RecipeModelTest(RecipeTestBase):
         )
         recipe.full_clean()
         recipe.save()
-        self.assertFalse(
-            getattr(self.recipe, field),
-        )
+        self.assertFalse(getattr(recipe, field))
 
     def test_recipe_string_representation(self):
         needed = 'Testing Representation'

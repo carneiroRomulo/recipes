@@ -13,7 +13,7 @@ class Recipe(models.Model):
     slug = models.SlugField(unique=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
-    is_published = models.BooleanField(default=True)
+    is_published = models.BooleanField(default=False)
     cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')
 
     category = models.ForeignKey(
