@@ -245,3 +245,19 @@ h1, h2, h3, h4, h5, h6 {
 .center {
     text-align: center;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    gap: 1rem 0.5rem;
+}
+.pagination .page-link {
+    text-decoration: none;
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.5rem 1rem;
+}
+.pagination .page-current {
+    background: var(--color-dark-text)
+}

@@ -134,6 +134,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .recipe-list-item {
     max-width: 65rem;
+    height: fit-content;
 }
 .recipe-list-item:hover {
     box-shadow: -8px 8px 16px rgba(0, 0, 0, 0.25);
@@ -141,6 +142,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 .recipe-title-container {
     padding: var(--spacing-gutter-small) var(--spacing-gutter-medium);
+}
+.recipe-title-container a {
+    text-decoration: none;
+    color: var(--color-primary-dark);
 }
 .recipe-author {
     padding: 0 var(--spacing-gutter-medium);
@@ -216,4 +221,38 @@ h1, h2, h3, h4, h5, h6 {
 
 .main-footer a:hover {
     filter: brightness(.8);
+}
+
+.preparation-steps {
+    padding: var(--spacing-gutter-large)
+}
+.preparation-steps h1,
+.preparation-steps h2,
+.preparation-steps h3,
+.preparation-steps h4,
+.preparation-steps h5,
+.preparation-steps h6,
+.preparation-steps p,
+.preparation-steps pre {
+    margin: 2rem 0;
+}
+.preparation-steps ol,
+.preparation-steps ul {
+    margin: 2rem;
+    padding: 0 2rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.pagination-content {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem 0.5rem;
+}
+
+.pagination .page-item {
+    text-decoration: none;
+    border: 5px solid black;
 }
