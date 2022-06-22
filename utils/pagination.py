@@ -22,6 +22,7 @@ def make_pagination_range(page_range, page_quantity, page_current):
         "pagination": pagination,
         "page_current": page_current,
         "page_range": page_range,
+        "total_pages": len(page_range),
         "first_page_out_of_range": page_current > middle_range,
         "last_page_out_of_range":
             page_current < len(page_range) - middle_range,
