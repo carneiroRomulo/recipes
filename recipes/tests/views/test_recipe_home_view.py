@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from django.urls import resolve, reverse
 from recipes import views
 
@@ -28,10 +30,11 @@ class RecipeViewHomeTest(RecipeTestBase):
     def test_recipe_home_template_loads_recipes(self):
         self.make_recipe()
         response = self.client.get(reverse('recipes:home'))
+        content = response.content.decode('utf-8')
         context = response.context['recipes']
 
+        self.assertIn('Recipe Title', content)
         self.assertEqual(len(context), 1)
-        self.assertEqual(context.first().title, 'Recipe Title')
 
     def test_recipe_home_template_dont_load_non_published_recipes(self):
         self.make_recipe(is_published=False)
@@ -40,3 +43,19 @@ class RecipeViewHomeTest(RecipeTestBase):
             '<h1>No recipes found here</h1>',
             response.content.decode('utf-8')
         )
+
+    def test_recipe_home_is_paginated(self):
+        for i in range(10):
+            kwargs = {'slug': f'r{i}', 'author': {'username': f'u{i}'}}
+            self.make_recipe(**kwargs)
+
+        with patch('recipes.views.RECIPES_PER_PAGE', 3):
+            response = self.client.get(reverse('recipes:home'))
+            recipes = response.context['recipes']
+            paginator = recipes.paginator
+
+            self.assertEqual(paginator.num_pages, 4)
+            self.assertEqual(len(paginator.get_page(1)), 3)
+            self.assertEqual(len(paginator.get_page(2)), 3)
+            self.assertEqual(len(paginator.get_page(3)), 3)
+            self.assertEqual(len(paginator.get_page(4)), 1)
