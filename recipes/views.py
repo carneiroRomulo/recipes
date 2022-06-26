@@ -7,7 +7,7 @@ from utils.pagination import pagination
 
 from .models import Recipe
 
-RECIPES_PER_PAGE = os.environ.get("RECIPES_PER_PAGE", 6)
+RECIPES_PER_PAGE = int(os.environ.get("RECIPES_PER_PAGE", 6))
 
 # Create your views here.
 
