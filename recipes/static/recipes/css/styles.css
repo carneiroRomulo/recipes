@@ -262,6 +262,45 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--color-dark-text)
 }
 
+/* FORMS */
+.register-container {
+    border-radius: .4rem;
+    border: 1px solid var(--color-primary-dark);
+}
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 48rem;
+    margin: 0 auto;
+    margin-bottom: var(--spacing-gutter-medium);
+}
+.form-content label, 
+.form-content .help-text,
+.errorlist {
+    display: block;
+    margin: .5rem 0;
+    font-size: 1.4rem;
+}
+.errorlist {
+    list-style-type: none;
+    color: var(--color-error-dark)
+}
+.form-content input{
+    width: 100%;
+    padding: 1rem;
+    border-radius: .4rem;
+    border: 1px solid var(--color-primary-dark)
+}
+.form-content button {
+    padding: 1rem 2rem;
+    width: 100%;
+    border-radius: .4rem;
+    background: var(--color-primary-dark);
+    color: var(--color-white);
+    cursor: pointer;
+  }
+
 /* MESSAGES */
 .messages-container {
     display: flex;
