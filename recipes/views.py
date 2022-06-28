@@ -1,6 +1,5 @@
 import os
 
-from django.contrib import messages
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_list_or_404, get_object_or_404, render
@@ -18,10 +17,6 @@ def home(request):
 
     page_object, pagination_range = pagination(
         request, queryset=recipes, per_page=RECIPES_PER_PAGE)
-
-    messages.success(request, "Success message works !!!")
-    messages.success(request, "Success message works !!!")
-    messages.success(request, "Success message works !!!")
 
     return render(request, 'pages/home.html', context={
         'recipes': page_object,
