@@ -19,7 +19,9 @@ def home(request):
     page_object, pagination_range = pagination(
         request, queryset=recipes, per_page=RECIPES_PER_PAGE)
 
-    messages.debug(request, "Success message works !!!")
+    messages.success(request, "Success message works !!!")
+    messages.success(request, "Success message works !!!")
+    messages.success(request, "Success message works !!!")
 
     return render(request, 'pages/home.html', context={
         'recipes': page_object,
