@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 
 def add_attr(field, attr_name, attr_new_value):
@@ -72,3 +73,36 @@ class RegisterForm(forms.ModelForm):
             }),
 
         }
+
+    def clean_password(self):
+        data = self.cleaned_data.get('password')
+
+        if 'atenção' in data:
+            raise ValidationError(
+                'Não digite "%(value)s" no campo password',
+                code='invalid',
+                params={'value': 'atenção'}
+            )
+        return data
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        password = cleaned_data.get('password')
+        confirm_password = cleaned_data.get('confirm_password')
+
+        if password != confirm_password:
+            password_confirmation_error = ValidationError(
+                'Passwords do not match',
+                code='invalid',
+            )
+            # Errors can be chained
+            raise ValidationError({
+                'password': password_confirmation_error,
+                'confirm_password': [
+                    password_confirmation_error,
+                    'Another error'
+                ],
+            })
+
+        return cleaned_data
