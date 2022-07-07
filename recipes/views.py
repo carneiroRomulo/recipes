@@ -18,7 +18,7 @@ def home(request):
     page_object, pagination_range = pagination(
         request, queryset=recipes, per_page=RECIPES_PER_PAGE)
 
-    return render(request, 'pages/home.html', context={
+    return render(request, 'recipes/pages/home.html', context={
         'recipes': page_object,
         'pagination_range': pagination_range,
     })
@@ -35,7 +35,7 @@ def category(request, id):
     page_object, pagination_range = pagination(
         request, queryset=recipes, per_page=RECIPES_PER_PAGE)
 
-    return render(request, 'pages/category.html', context={
+    return render(request, 'recipes/pages/category.html', context={
         'recipes': page_object,
         'pagination_range': pagination_range,
         'title': f'{recipes[0].category.name}'
@@ -45,7 +45,7 @@ def category(request, id):
 def recipe(request, id):
     recipe = get_object_or_404(Recipe, id=id, is_published=True)
 
-    return render(request, 'pages/recipe.html', context={
+    return render(request, 'recipes/pages/recipe.html', context={
         'recipe': recipe,
         'is_detail_page': True,
     })
@@ -68,7 +68,7 @@ def search(request):
     page_object, pagination_range = pagination(
         request, queryset=recipes, per_page=RECIPES_PER_PAGE)
 
-    return render(request, 'pages/search.html', context={
+    return render(request, 'recipes/pages/search.html', context={
         'page_title': f'Search for "{search_term}"',
         'search_term': search_term,
         'recipes': page_object,
