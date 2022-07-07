@@ -27,35 +27,29 @@ class RegisterForm(forms.ModelForm):
 
     # Second way to modify forms. Can also create new fields.
     first_name = forms.CharField(
-        required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Ex.: Romulo'}),
         label='First Name',
         help_text='Type only letters',
     )
     last_name = forms.CharField(
-        required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Ex.: Carneiro'}),
         label='Last Name',
         help_text='Type only letters',
     )
     username = forms.CharField(
-        required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Your username'}),
         label='Username',
     )
     email = forms.EmailField(
-        required=True,
         widget=forms.EmailInput(attrs={'placeholder': 'Your e-mail'}),
         label='E-mail',
     )
     password = forms.CharField(
-        required=True,
         widget=forms.PasswordInput(attrs={'placeholder': 'Your password'}),
         label='Password',
         validators=[strong_password]
     )
     confirm_password = forms.CharField(
-        required=True,
         widget=forms.PasswordInput(attrs={'placeholder': 'Confirm password'}),
         label='Confirm Password',
         validators=[strong_password]
