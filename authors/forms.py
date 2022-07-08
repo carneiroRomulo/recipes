@@ -13,10 +13,11 @@ def add_attr(field, attr_name, attr_new_value):
 def strong_password(password):
     regex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$')
     if not regex.match(password):
-        raise ValidationError('Password must have at least 8 characters long, \
-                                allowed are [a-z][A-Z][0-9]',
-                              code='invalid',
-                              )
+        raise ValidationError(
+            ('Password must have at least 8 characters long, '
+             'allowed are [a-z][A-Z][0-9]'),
+            code='invalid',
+        )
 
 
 class RegisterForm(forms.ModelForm):
@@ -39,6 +40,8 @@ class RegisterForm(forms.ModelForm):
     username = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Your username'}),
         label='Username',
+        min_length=6,
+        max_length=40,
     )
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'placeholder': 'Your e-mail'}),
@@ -47,12 +50,11 @@ class RegisterForm(forms.ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder': 'Your password'}),
         label='Password',
-        validators=[strong_password]
+        validators=[strong_password],
     )
     confirm_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder': 'Confirm password'}),
         label='Confirm Password',
-        validators=[strong_password]
     )
 
     class Meta:
