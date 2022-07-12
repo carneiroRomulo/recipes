@@ -1,31 +1,10 @@
-import re
-
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-
-# def add_attr(field, attr_name, attr_new_value):
-#   existing_attr = field.widget.attrs.get(attr_name, '')
-#   field.widget.attrs[attr_name] = f'{existing_attr} {attr_new_value}'.strip()
-
-
-def strong_password(password):
-    regex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$')
-    if not regex.match(password):
-        raise ValidationError(
-            ('Password must have at least 8 characters long, '
-             'allowed are [a-z][A-Z][0-9]'),
-            code='invalid',
-        )
+from utils.django_forms import strong_password
 
 
 class RegisterForm(forms.ModelForm):
-    # First way to modify forms. Can be used to add widgets in existing fields
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # add_attr(self.fields['username'], 'placeholder', 'Your username')
-
-    # Second way to modify forms. Can also create new fields.
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Ex.: Romulo'}),
         label='First Name',

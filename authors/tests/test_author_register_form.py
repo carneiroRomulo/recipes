@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from authors.forms import RegisterForm
+from authors.forms.register_form import RegisterForm
 from django.test import TestCase as DjangoTestCase
 from django.urls import reverse
 from parameterized import parameterized
@@ -65,7 +65,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
     ])
     def test_fields_cannot_be_empty(self, field, message):
         self.form_data[field] = ''
-        url = reverse('authors:create')
+        url = reverse('authors:register_create')
         response = self.client.post(url, data=self.form_data, follow=True)
 
         self.assertIn(message, response.context['form'].errors.get(field))
@@ -73,7 +73,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
 
     def test_username_field_min_length_shold_be_6(self):
         self.form_data['username'] = 'joa'
-        url = reverse('authors:create')
+        url = reverse('authors:register_create')
         response = self.client.post(url, data=self.form_data, follow=True)
 
         msg = 'Ensure this value has at least 6 characters (it has 3).'
@@ -82,7 +82,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
 
     def test_username_field_max_length_should_be_40(self):
         self.form_data['username'] = 'A' * 41
-        url = reverse('authors:create')
+        url = reverse('authors:register_create')
         response = self.client.post(url, data=self.form_data, follow=True)
 
         msg = 'Ensure this value has at most 40 characters (it has 41).'
@@ -95,7 +95,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
             ('Password must have at least 8 characters long, '
              'allowed are [a-z][A-Z][0-9]')
         )
-        url = reverse('authors:create')
+        url = reverse('authors:register_create')
 
         response = self.client.post(url, data=self.form_data, follow=True)
         self.assertNotIn(msg, response.content.decode('utf-8'))
@@ -107,7 +107,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
 
     def test_password_and_password_confirmation_are_equal(self):
         # Check if password is valid
-        url = reverse('authors:create')
+        url = reverse('authors:register_create')
         msg = 'Passwords do not match'
 
         response = self.client.post(url, data=self.form_data, follow=True)
@@ -120,12 +120,12 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_send_get_request_to_registration_create_view_returns_404(self):
-        url = reverse('authors:create')
+        url = reverse('authors:register_create')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
     def test_email_field_must_be_unique(self):
-        url = reverse('authors:create')
+        url = reverse('authors:register_create')
         self.client.post(url, data=self.form_data, follow=True)
         response = self.client.post(url, data=self.form_data, follow=True)
 
@@ -134,7 +134,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_author_created_can_login(self):
-        url = reverse('authors:create')
+        url = reverse('authors:register_create')
 
         self.form_data.update({
             'username': 'Romulo',
