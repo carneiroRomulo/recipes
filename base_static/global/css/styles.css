@@ -301,6 +301,15 @@ h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
   }
 
+.plaintext-button {
+    display: inline;
+    border: none;
+    background: none;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 1.6rem;
+}
+
 /* MESSAGES */
 .messages-container {
     display: flex;
