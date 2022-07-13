@@ -2,15 +2,7 @@ from django.test import TestCase
 from recipes import models
 
 
-class RecipeTestBase(TestCase):
-    # Executed before any test
-    # def setUp(self) -> None:
-    #     return super().setUp()
-
-    # # Executed after any test
-    # def tearDown(self) -> None:
-    #     return super().tearDown()
-
+class RecipeMixin:
     def make_category(self, name='Category'):
         return models.Category.objects.create(name=name)
 
@@ -60,3 +52,8 @@ class RecipeTestBase(TestCase):
             preparation_steps=preparation_steps,
             preparation_steps_is_html=preparation_steps_is_html,
         )
+
+
+class RecipeTestBase(TestCase, RecipeMixin):
+    def setUp(self) -> None:
+        return super().setUp()
