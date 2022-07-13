@@ -18,10 +18,3 @@ def make_chrome_browser(*options):
     browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
     return browser
-
-
-if __name__ == "__main__":
-    browser = make_chrome_browser("--headless", "--no-sandbox")
-    browser.get('https://www.google.com/')
-    sleep(5)
-    browser.quit()
