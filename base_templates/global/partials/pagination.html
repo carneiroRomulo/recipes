@@ -1,25 +1,46 @@
 {% if recipes.has_other_pages %}
-    <div class="container pagination">
+    <nav  role="navigation" aria-label="Pagination" class="container pagination">
         {% if pagination_range.first_page_out_of_range %}
-            <a href="?page=1{{ additional_url_query }}" class="page-link">1</a>
+            <a 
+                aria-label="Go to page 1" 
+                href="?page=1{{ additional_url_query }}" 
+                class="page-link"
+            >
+                1
+            </a>
             <span class="page-item">...</span>
         {% endif %}
 
         {% for page in pagination_range.pagination %}
             {% if pagination_range.page_current == page %}
-                <a href="?page={{page}}{{ additional_url_query }}" class="page-link page-current">{{page}}</a>
+                <a 
+                    aria-label="Current Page, {{ page }}" 
+                    aria-current="true" 
+                    href="?page={{page}}{{ additional_url_query }}" 
+                    class="page-link page-current"
+                >
+                    {{page}}
+                </a>
             {% else %}
-                <a href="?page={{page}}{{ additional_url_query }}" class="page-link">{{page}}</a>
+                <a 
+                    aria-label="Go to page {{ page }}"
+                    href="?page={{page}}{{ additional_url_query }}" 
+                    class="page-link"
+                >
+                    {{page}}
+                </a>
             {% endif %}
         {% endfor %}
     
         {% if pagination_range.last_page_out_of_range %}
             <span class="page-item">...</span>
-            <a  href="?page={{pagination_range.total_pages}}{{ additional_url_query }}" 
+            <a  
+                aria-label="Go to page {{ pagination_range.total_pages }}"
+                href="?page={{pagination_range.total_pages}}{{ additional_url_query }}" 
                 class="page-link"
             >
                 {{pagination_range.total_pages}}
             </a>   
         {% endif %}
-    </div>
+    </nav>
 {% endif %}
